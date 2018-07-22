@@ -4,4 +4,4 @@ require "dotenv"
 
 Dotenv.load(".env.test")
 
-require "stubs"
+require "factory"

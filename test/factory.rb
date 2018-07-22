@@ -1,4 +1,14 @@
-class Stubs
+class Factory
+  def self.bullet(attrs)
+    defaults = {
+      "id"=>"Qp5qIiccr1XuAP6rJL5RX_jt",
+      "content"=>"The content",
+      "note"=>"A note",
+      "checked"=>false
+    }
+    Bullet.from_json(defaults.merge(attrs))
+  end
+
   def self.files_response
     {
       "_code"=>"Ok",
