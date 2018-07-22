@@ -1,5 +1,6 @@
 class Bullet
   TAG_MARKERS = ["#", "@"]
+  DATE_MARKER = /!\((.+)\)/
 
   attr_reader :id, :content, :note, :checked
 
@@ -23,5 +24,12 @@ class Bullet
 
   def has_tag(tag)
     TAG_MARKERS.any? { |marker| content.match?(marker + tag) || note.match?(marker + tag) }
+  end
+
+  def date
+    # TODO: Handle multiple matches
+    date_string = content.match(DATE_MARKER) || note.match(DATE_MARKER)
+
+    DateTime.parse(date_string[1]) unless date_string.nil?
   end
 end
