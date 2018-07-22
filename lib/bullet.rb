@@ -34,4 +34,8 @@ class Bullet
 
     DateTime.parse(date_string[1]) unless date_string.nil?
   end
+
+  def link
+    "https://dynalist.io/d/#{file_id}#z=#{id}"
+  end
 end

@@ -48,6 +48,8 @@ class BulletTest < Minitest::Test
   end
 
   def test_link
+    bullet = Factory.bullet(file_id: "wvixjccy61qVpesh489VTCUt", id: "Qp5qIiccr1XuAP6rJL5RX_jt")
 
+    assert_equal "https://dynalist.io/d/wvixjccy61qVpesh489VTCUt#z=Qp5qIiccr1XuAP6rJL5RX_jt", bullet.link
   end
 end
