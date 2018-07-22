@@ -36,7 +36,7 @@ class Bullet
     # TODO: Handle multiple matches
     date_string = content.match(DATE_MARKER) || note.match(DATE_MARKER)
 
-    DateTime.parse(date_string[1]) unless date_string.nil?
+    Date.parse(date_string[1]) unless date_string.nil?
   end
 
   def link

@@ -47,8 +47,8 @@ class BulletTest < Minitest::Test
     note_dated_bullet = Factory.bullet(note: "A note with date !(2018-08-19 16:00)")
 
     assert_nil Factory.bullet.date
-    assert_equal DateTime.new(2018, 8, 19), content_dated_bullet.date
-    assert_equal DateTime.new(2018, 8, 19, 16, 0), note_dated_bullet.date
+    assert_equal Date.new(2018, 8, 19), content_dated_bullet.date
+    assert_equal Date.new(2018, 8, 19), note_dated_bullet.date
   end
 
   def test_link
