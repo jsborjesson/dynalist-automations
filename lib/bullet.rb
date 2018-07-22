@@ -2,22 +2,24 @@ class Bullet
   TAG_MARKERS = ["#", "@"]
   DATE_MARKER = /!\((.+)\)/
 
-  attr_reader :id, :content, :note, :checked
+  attr_reader :id, :content, :note, :checked, :file_id
 
-  def initialize(id:, content:, note:, checked:)
-    @id = id
+  def initialize(id:, content:, note:, checked:, file_id:)
+    @id      = id
     @content = content
-    @note = note
+    @note    = note
     @checked = checked
+    @file_id = file_id
   end
 
   alias_method :checked?, :checked
 
-  def self.from_json(json)
+  def self.from_json(file_id, json)
     new(
-      id: json.fetch("id"),
+      file_id: file_id,
+      id:      json.fetch("id"),
       content: json.fetch("content"),
-      note: json.fetch("note"),
+      note:    json.fetch("note"),
       checked: json.fetch("checked"),
     )
   end
