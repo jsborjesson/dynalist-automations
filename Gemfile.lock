@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    coderay (1.1.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     domain_name (0.5.20180417)
@@ -18,7 +19,11 @@ GEM
       domain_name (~> 0.5)
     http-form_data (2.1.1)
     http_parser.rb (0.6.0)
+    method_source (0.9.0)
     minitest (5.11.3)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (3.0.2)
     rake (12.3.0)
     safe_yaml (1.0.4)
@@ -37,6 +42,7 @@ DEPENDENCIES
   dotenv
   http
   minitest
+  pry
   rake
   webmock
 
