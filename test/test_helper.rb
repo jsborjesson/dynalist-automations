@@ -3,3 +3,5 @@ require "webmock/minitest"
 require "dotenv"
 
 Dotenv.load(".env.test")
+
+require "stubs"
