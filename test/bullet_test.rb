@@ -2,45 +2,35 @@ require "test_helper"
 require "bullet"
 
 class BulletTest < Minitest::Test
-  def json
-    {
+  def test_from_json
+    bullet = Bullet.from_json({
       "id"=>"Qp5qIiccr1XuAP6rJL5RX_jt",
       "content"=>"The content",
       "note"=>"A note",
       "checked"=>false
-    }
-  end
+    })
 
-  def setup
-    @bullet = Bullet.from_json(json)
-  end
-
-  def test_id
-    assert_equal "Qp5qIiccr1XuAP6rJL5RX_jt", @bullet.id
-  end
-
-  def test_content
-    assert_equal "The content", @bullet.content
-  end
-
-  def test_note
-    assert_equal "A note", @bullet.note
+    assert_equal "Qp5qIiccr1XuAP6rJL5RX_jt", bullet.id
+    assert_equal "The content", bullet.content
+    assert_equal "A note", bullet.note
+    assert_equal false, bullet.checked
   end
 
   def test_checked?
-    checked_bullet = Bullet.from_json(json.merge("checked" => true))
+    unchecked_bullet = Factory.bullet(checked: false)
+    checked_bullet = Factory.bullet(checked: true)
 
-    refute @bullet.checked?
+    refute unchecked_bullet.checked?
     assert checked_bullet.checked?
   end
 
   def test_tagged_with?
-    content_hash_tagged_bullet = Bullet.from_json(json.merge("content" => "A content #tagged bullet"))
-    content_at_tagged_bullet = Bullet.from_json(json.merge("content" => "A content @tagged bullet"))
-    note_hash_tagged_bullet = Bullet.from_json(json.merge("note" => "A note #tagged bullet"))
-    note_at_tagged_bullet = Bullet.from_json(json.merge("note" => "A note @tagged bullet"))
+    content_hash_tagged_bullet = Factory.bullet(content: "A content #tagged bullet")
+    content_at_tagged_bullet   = Factory.bullet(content: "A content @tagged bullet")
+    note_hash_tagged_bullet    = Factory.bullet(note: "A note #tagged bullet")
+    note_at_tagged_bullet      = Factory.bullet(note: "A note @tagged bullet")
 
-    refute @bullet.has_tag("tagged")
+    refute Factory.bullet.has_tag("tagged")
     assert content_hash_tagged_bullet.has_tag("tagged")
     assert content_at_tagged_bullet.has_tag("tagged")
     assert note_hash_tagged_bullet.has_tag("tagged")
@@ -48,10 +38,10 @@ class BulletTest < Minitest::Test
   end
 
   def test_date
-    content_dated_bullet = Bullet.from_json(json.merge("content" => "A content with date !(2018-08-19)"))
-    note_dated_bullet = Bullet.from_json(json.merge("note" => "A note with date !(2018-08-19 16:00)"))
+    content_dated_bullet = Factory.bullet(content: "A content with date !(2018-08-19)")
+    note_dated_bullet = Factory.bullet(note: "A note with date !(2018-08-19 16:00)")
 
-    assert_nil @bullet.date
+    assert_nil Factory.bullet.date
     assert_equal DateTime.new(2018, 8, 19), content_dated_bullet.date
     assert_equal DateTime.new(2018, 8, 19, 16, 0), note_dated_bullet.date
   end

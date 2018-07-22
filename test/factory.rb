@@ -1,12 +1,11 @@
 class Factory
-  def self.bullet(attrs)
-    defaults = {
-      "id"=>"Qp5qIiccr1XuAP6rJL5RX_jt",
-      "content"=>"The content",
-      "note"=>"A note",
-      "checked"=>false
-    }
-    Bullet.from_json(defaults.merge(attrs))
+  def self.bullet(attrs = {})
+    Bullet.new(
+      id:      attrs[:id] || "Qp5qIiccr1XuAP6rJL5RX_jt",
+      content: attrs[:content] || "The content",
+      note:    attrs[:note] || "A note",
+      checked: attrs[:checked] || false,
+    )
   end
 
   def self.files_response

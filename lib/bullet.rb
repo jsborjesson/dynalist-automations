@@ -4,7 +4,7 @@ class Bullet
 
   attr_reader :id, :content, :note, :checked
 
-  def initialize(id, content, note, checked)
+  def initialize(id:, content:, note:, checked:)
     @id = id
     @content = content
     @note = note
@@ -15,10 +15,10 @@ class Bullet
 
   def self.from_json(json)
     new(
-      json.fetch("id"),
-      json.fetch("content"),
-      json.fetch("note"),
-      json.fetch("checked"),
+      id: json.fetch("id"),
+      content: json.fetch("content"),
+      note: json.fetch("note"),
+      checked: json.fetch("checked"),
     )
   end
 
