@@ -25,6 +25,10 @@ class BulletTest < Minitest::Test
     assert checked_bullet.checked?
   end
 
+  def test_inspect
+    assert_equal '#<Bullet: "The content">', Factory.bullet(content: "The content").inspect
+  end
+
   def test_tagged_with?
     content_hash_tagged_bullet = Factory.bullet(content: "A content #tagged bullet")
     content_at_tagged_bullet   = Factory.bullet(content: "A content @tagged bullet")

@@ -24,6 +24,10 @@ class Bullet
     )
   end
 
+  def inspect
+    %(#<Bullet: "#{content}">)
+  end
+
   def has_tag(tag)
     TAG_MARKERS.any? { |marker| content.match?(marker + tag) || note.match?(marker + tag) }
   end
