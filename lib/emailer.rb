@@ -14,7 +14,6 @@ class Emailer
         user_name:            ENV.fetch("EMAIL_ADDRESS"),
         password:             ENV.fetch("EMAIL_PASSWORD"),
         authentication:       :plain,
-        domain:               "localhost.localdomain"
       }
     })
   end
