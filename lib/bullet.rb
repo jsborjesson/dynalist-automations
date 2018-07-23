@@ -42,4 +42,13 @@ class Bullet
   def link
     "https://dynalist.io/d/#{file_id}#z=#{id}"
   end
+
+  def to_html
+    <<~HTML
+      <li>
+        #{content}<br/>
+        <small>#{note}</small>
+      </li>
+    HTML
+  end
 end

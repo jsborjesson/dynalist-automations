@@ -56,4 +56,15 @@ class BulletTest < Minitest::Test
 
     assert_equal "https://dynalist.io/d/wvixjccy61qVpesh489VTCUt#z=Qp5qIiccr1XuAP6rJL5RX_jt", bullet.link
   end
+
+  def test_to_html
+    bullet = Factory.bullet
+
+    assert_equal <<~HTML, bullet.to_html
+      <li>
+        The content<br/>
+        <small>A note</small>
+      </li>
+    HTML
+  end
 end
