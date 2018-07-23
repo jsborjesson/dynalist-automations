@@ -44,3 +44,9 @@ heroku config:set DAILY_REMINDER_DOCUMENT=AABBBCCC
 # Manually run the rake task to see if it works
 heroku run rake send_notification
 ```
+
+## Using GMail
+
+Google will most likely block sending emails from Heroku on the first attempt. You need to log into your account and confirm that the server is yours after trying.
+
+You may have to go to https://accounts.google.com/DisplayUnlockCaptcha in incognito mode, logged into that account.
