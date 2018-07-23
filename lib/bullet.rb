@@ -44,11 +44,13 @@ class Bullet
   end
 
   def to_html
-    <<~HTML
-      <li>
-        #{content}<br/>
-        <small>#{note}</small>
-      </li>
+    a = <<~HTML
+      <a href="#{link}">
+        <li>
+          <div><b>#{content}</b></div>
+          <div><i>#{note}</i></div>
+        </li>
+      </a>
     HTML
   end
 end

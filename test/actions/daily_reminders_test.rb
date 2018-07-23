@@ -5,14 +5,18 @@ class DailyRemindersTest < Minitest::Test
   def test_send_daily_reminder
     expected_email_body = <<~HTML
       <ul>
-      <li>
-        Bullet 2 !(2018-07-22 15:00)<br/>
-        <small></small>
-      </li>
-      <li>
-        Bullet 4<br/>
-        <small>!(2018-07-22)</small>
-      </li>
+      <a href="https://dynalist.io/d/file_id#z=Qp5qIiccr1XuAP6rJL5RX_jt">
+        <li>
+          <div><b>Bullet 2 !(2018-07-22 15:00)</b></div>
+          <div><i></i></div>
+        </li>
+      </a>
+      <a href="https://dynalist.io/d/file_id#z=xbexUA6PK1ZJ7yHk1UMPbCcv">
+        <li>
+          <div><b>Bullet 4</b></div>
+          <div><i>!(2018-07-22)</i></div>
+        </li>
+      </a>
       </ul>
     HTML
     document = Document.from_json("file_id", Factory.document_response)

@@ -61,10 +61,12 @@ class BulletTest < Minitest::Test
     bullet = Factory.bullet
 
     assert_equal <<~HTML, bullet.to_html
-      <li>
-        The content<br/>
-        <small>A note</small>
-      </li>
+      <a href="https://dynalist.io/d/abcd1234#z=defg5678">
+        <li>
+          <div><b>The content</b></div>
+          <div><i>A note</i></div>
+        </li>
+      </a>
     HTML
   end
 end
