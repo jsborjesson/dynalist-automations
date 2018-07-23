@@ -1,3 +1,5 @@
+require "./lib/bullet"
+
 class Document
   attr_reader :id, :bullets
 

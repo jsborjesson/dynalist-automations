@@ -43,12 +43,12 @@ class BulletTest < Minitest::Test
   end
 
   def test_date
-    content_dated_bullet = Factory.bullet(content: "A content with date !(2018-08-19)")
-    note_dated_bullet = Factory.bullet(note: "A note with date !(2018-08-19 16:00)")
+    content_dated_bullet = Factory.bullet(content: "A content with date !(2018-08-19) (and other shit)")
+    note_dated_bullet = Factory.bullet(note: "#due !(2018-09-02) (Halva priset på leverans)")
 
     assert_nil Factory.bullet.date
     assert_equal Date.new(2018, 8, 19), content_dated_bullet.date
-    assert_equal Date.new(2018, 8, 19), note_dated_bullet.date
+    assert_equal Date.new(2018, 9, 2), note_dated_bullet.date
   end
 
   def test_link

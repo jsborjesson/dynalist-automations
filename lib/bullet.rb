@@ -1,6 +1,6 @@
 class Bullet
   TAG_MARKERS = ["#", "@"]
-  DATE_MARKER = /!\((.+)\)/
+  DATE_MARKER = /!\((.+?)\)/
 
   attr_reader :id, :content, :note, :checked, :file_id
 
