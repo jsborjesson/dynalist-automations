@@ -1,9 +1,9 @@
 require "pony"
 
 class Emailer
-  def self.send_notification(body)
+  def self.send_notification(body, subject = "Dynalist Automator Update")
     Pony.mail({
-      subject: "Dynalist Automator Update",
+      subject: subject,
       body: body,
       to: ENV.fetch("EMAIL_RECEIVER"),
       via: :smtp,
@@ -13,8 +13,8 @@ class Emailer
         enable_starttls_auto: true,
         user_name:            ENV.fetch("EMAIL_ADDRESS"),
         password:             ENV.fetch("EMAIL_PASSWORD"),
-        authentication:       :plain, # :plain, :login, :cram_md5, no auth by default
-        domain:               "localhost.localdomain" # the HELO domain provided by the client to the server
+        authentication:       :plain,
+        domain:               "localhost.localdomain"
       }
     })
   end
