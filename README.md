@@ -21,7 +21,7 @@ bundle exec rake test
 - Get an API key from https://dynalist.io/developer
 - Find out the id of the document you want to watch (visible in the link URL when viewing that document)
 - Create a Heroku dyno
-- Attatch a Heroku Scheduler resource, set it to every day when it suits you and set the command to `rake send_notification`
+- Attatch a Heroku Scheduler resource, set it to every day when it suits you and set the command to `bundle exec rake send_notification`
 
 ```
 # Log into Heroku
