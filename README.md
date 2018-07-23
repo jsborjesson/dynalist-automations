@@ -4,8 +4,6 @@
 
 ## Development
 
-- Get an API key from https://dynalist.io/developer
-
 ```
 # Install dependencies
 bundle
@@ -19,3 +17,30 @@ bundle exec rake test
 - [Dynalist API docs](https://apidocs.dynalist.io/)
 
 ## Deployment
+
+- Get an API key from https://dynalist.io/developer
+- Find out the id of the document you want to watch (visible in the link URL when viewing that document)
+- Create a Heroku dyno
+- Attatch a Heroku Scheduler resource, set it to every day when it suits you and set the command to `rake send_notification`
+
+```
+# Log into Heroku
+heroku login
+
+# Attatch the project to the Dyno you created
+heroku git:remote -a <your heroku dynos id>
+
+# Deploy the project
+git push heroku master
+
+# Set the ENV variables
+heroku config:set EMAIL_RECEIVER=your_email@email.com
+heroku config:set EMAIL_ADDRESS=email_sender@email.com
+heroku config:set EMAIL_PASSWORD="password"
+heroku config:set DYNALIST_API_BASE=https://dynalist.io/api/v1
+heroku config:set DYNALIST_API_TOKEN=your_api_token
+heroku config:set DAILY_REMINDER_DOCUMENT=AABBBCCC
+
+# Manually run the rake task to see if it works
+heroku run rake send_notification
+```
