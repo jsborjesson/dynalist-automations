@@ -10,8 +10,24 @@ task default: :test
 
 desc "Send daily notification"
 task :send_notification do
-  require "./lib/emailer"
   require "dotenv/load"
 
-  Emailer.send_notification
+  require "./lib/document"
+  require "./lib/dynalist"
+  require "./lib/emailer"
+  require "./lib/actions/daily_reminders"
+
+  file_id = ENV.fetch("DAILY_REMINDER_DOCUMENT")
+  document = Document.from_json(
+    file_id,
+    Dynalist.new.document(file_id),
+  )
+
+  action = DailyReminders.new(
+    document: document,
+    notifier: Emailer,
+    date: Date.today
+  )
+
+  action.execute
 end

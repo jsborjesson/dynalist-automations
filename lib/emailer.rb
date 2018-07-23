@@ -4,7 +4,7 @@ class Emailer
   def self.send_notification(body, subject = "Dynalist Automator Update")
     Pony.mail({
       subject: subject,
-      body: body,
+      html_body: body,
       to: ENV.fetch("EMAIL_RECEIVER"),
       via: :smtp,
       via_options: {
