@@ -1,6 +1,6 @@
 # Dynalist Automations
 
-- Sends email updates with bullets based on a search
+- Sends email updates with all bullet points dated today
 
 ## Development
 
