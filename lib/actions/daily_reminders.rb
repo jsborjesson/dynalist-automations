@@ -6,7 +6,7 @@ class DailyReminders
 
   def initialize(document:, notifier:, date: Date.today)
     @document = document
-    @notifier  = notifier
+    @notifier = notifier
     @date     = date
   end
 
