@@ -1,10 +1,11 @@
 require "date"
+require "./lib/emailer"
 
 class DailyReminders
   attr_reader :document, :notifier, :date
   private :document, :notifier, :date
 
-  def initialize(document:, notifier:, date: Date.today)
+  def initialize(document:, notifier: Emailer, date: Date.today)
     @document = document
     @notifier = notifier
     @date     = date
