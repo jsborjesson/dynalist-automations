@@ -11,7 +11,7 @@ class DailyReminders
   end
 
   def execute
-    bullets = @document.bullets_with_date(date)
+    bullets = document.bullets_with_date(date)
 
     html = <<~HTML
     <ul>

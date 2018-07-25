@@ -12,16 +12,12 @@ desc "Send daily notification"
 task :send_notification do
   require "dotenv/load"
 
-  require "./lib/document"
   require "./lib/dynalist"
   require "./lib/emailer"
   require "./lib/actions/daily_reminders"
 
   file_id = ENV.fetch("DAILY_REMINDER_DOCUMENT")
-  document = Document.from_json(
-    file_id,
-    Dynalist.new.document(file_id),
-  )
+  document = Dynalist.new.document(file_id)
 
   action = DailyReminders.new(
     document: document,

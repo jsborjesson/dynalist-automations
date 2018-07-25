@@ -1,4 +1,6 @@
 require "http"
+require "./lib/document"
+require "./lib/bullet"
 
 class Dynalist
   def initialize
@@ -11,7 +13,8 @@ class Dynalist
   end
 
   def document(file_id)
-    make_request("doc/read", file_id: file_id)
+    response = make_request("doc/read", file_id: file_id)
+    Document.from_json(file_id, response)
   end
 
   private

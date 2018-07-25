@@ -19,6 +19,10 @@ class DynalistTest < Minitest::Test
       .with(body: { file_id: "file_id", token: "abcd1234" }.to_json)
       .to_return(body: Factory.document_response.to_json)
 
-    assert_equal Factory.document_response, @api.document("file_id")
+    doc = @api.document("file_id")
+
+    assert_equal "file_id", doc.id
+    assert_equal 6, doc.bullets.count
+    assert doc.bullets.all? { |b| b.kind_of? Bullet }
   end
 end
