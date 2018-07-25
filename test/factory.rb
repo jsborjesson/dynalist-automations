@@ -1,3 +1,6 @@
+require "./lib/bullet"
+require "./lib/document"
+
 class Factory
   def self.bullet(attrs = {})
     Bullet.new(
@@ -7,6 +10,10 @@ class Factory
       checked: attrs[:checked] || false,
       file_id: attrs[:file_id] || "abcd1234",
     )
+  end
+
+  def self.document
+    Document.from_json("abcd1234", self.document_response)
   end
 
   def self.files_response
