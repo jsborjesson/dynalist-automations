@@ -1,12 +1,12 @@
 require "test_helper"
-require "actions/daily_reminders"
+require "actions/daily_reminder"
 
-class DailyRemindersTest < Minitest::Test
+class DailyReminderTest < Minitest::Test
   def test_send_daily_reminder
     emailer = MiniTest::Mock.new
     emailer.expect(:send_notification, nil, [String])
 
-    action = DailyReminders.new(
+    action = DailyReminder.new(
       document: Factory.document,
       notifier: emailer,
       date: Date.new(2018, 7, 22)

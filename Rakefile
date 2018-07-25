@@ -13,11 +13,11 @@ task :send_notification do
   require "dotenv/load"
 
   require "./lib/dynalist"
-  require "./lib/actions/daily_reminders"
+  require "./lib/actions/daily_reminder"
 
   file_id  = ENV.fetch("DAILY_REMINDER_DOCUMENT")
   document = Dynalist.new.document(file_id)
-  action   = DailyReminders.new(document: document)
+  action   = DailyReminder.new(document: document)
 
   action.execute
 end
