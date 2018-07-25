@@ -1,6 +1,7 @@
 require "date"
 require "./lib/emailer"
 
+# Sends a notification containing all bullets with a specified date
 class DailyReminders
   attr_reader :document, :notifier, :date
   private :document, :notifier, :date

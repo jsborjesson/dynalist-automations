@@ -1,5 +1,6 @@
 require "pony"
 
+# Sends HTML-formatted emails via a specified Gmail address.
 class Emailer
   def self.send_notification(body, subject = "Dynalist Automator Update")
     Pony.mail({

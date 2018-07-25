@@ -1,5 +1,6 @@
 require "./lib/bullet"
 
+# Represents an entire file and holds all bullet points within
 class Document
   attr_reader :id, :bullets
 

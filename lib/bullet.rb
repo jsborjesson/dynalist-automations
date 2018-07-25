@@ -1,3 +1,4 @@
+# Represents a single bullet point
 class Bullet
   TAG_MARKERS = ["#", "@"]
   DATE_MARKER = /!\((.+?)\)/

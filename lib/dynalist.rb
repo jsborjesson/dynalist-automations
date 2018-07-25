@@ -2,6 +2,7 @@ require "http"
 require "./lib/document"
 require "./lib/bullet"
 
+# Communicates with the Dynalist API
 class Dynalist
   def initialize(env = ENV)
     @api_base = env.fetch("DYNALIST_API_BASE")
