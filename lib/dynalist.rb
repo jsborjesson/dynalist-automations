@@ -3,9 +3,9 @@ require "./lib/document"
 require "./lib/bullet"
 
 class Dynalist
-  def initialize
-    @api_base = ENV.fetch("DYNALIST_API_BASE")
-    @api_token = ENV.fetch("DYNALIST_API_TOKEN")
+  def initialize(env = ENV)
+    @api_base = env.fetch("DYNALIST_API_BASE")
+    @api_token = env.fetch("DYNALIST_API_TOKEN")
   end
 
   def files

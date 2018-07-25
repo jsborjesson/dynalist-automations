@@ -2,8 +2,15 @@ require "test_helper"
 require "dynalist"
 
 class DynalistTest < Minitest::Test
+  def fake_env
+    {
+      "DYNALIST_API_BASE" => "https://dynalist.io/api/v1",
+      "DYNALIST_API_TOKEN" => "abcd1234",
+    }
+  end
+
   def setup
-    @api = Dynalist.new
+    @api = Dynalist.new(fake_env)
   end
 
   def test_files
