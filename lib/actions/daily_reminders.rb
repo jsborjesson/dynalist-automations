@@ -13,13 +13,16 @@ class DailyReminders
 
   def execute
     bullets = document.bullets_with_date(date)
+    notifier.send_notification(html(bullets))
+  end
 
-    html = <<~HTML
-    <ul>
-    #{bullets.map(&:to_html).join.strip}
-    </ul>
+  private
+
+  def html(bullets)
+    <<~HTML
+      <ul>
+      #{bullets.map(&:to_html).join.strip}
+      </ul>
     HTML
-
-    notifier.send_notification(html)
   end
 end
