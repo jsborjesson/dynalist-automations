@@ -1,3 +1,5 @@
+require "./lib/markdown"
+
 # Represents a single bullet point
 class Bullet
   TAG_MARKERS = ["#", "@"]
@@ -48,8 +50,8 @@ class Bullet
     a = <<~HTML
       <a href="#{link}">
         <li>
-          <div><b>#{content}</b></div>
-          <div><i>#{note}</i></div>
+          <div><b>#{Markdown.render(content)}</b></div>
+          <div><i>#{Markdown.render(note)}</i></div>
         </li>
       </a>
     HTML

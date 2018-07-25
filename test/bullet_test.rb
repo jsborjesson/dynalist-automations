@@ -58,13 +58,16 @@ class BulletTest < Minitest::Test
   end
 
   def test_to_html
-    bullet = Factory.bullet
+    bullet = Factory.bullet(
+      content: "The [content](https://dynalist.io/d/asdfgh)",
+      note: "A note !(2018-08-09)",
+    )
 
     assert_equal <<~HTML, bullet.to_html
       <a href="https://dynalist.io/d/abcd1234#z=defg5678">
         <li>
           <div><b>The content</b></div>
-          <div><i>A note</i></div>
+          <div><i>A note 2018-08-09</i></div>
         </li>
       </a>
     HTML
