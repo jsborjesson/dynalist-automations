@@ -13,7 +13,11 @@ class DailyReminder
   end
 
   def execute
-    bullets = document.with_date(date).bullets
+    bullets = document
+      .with_date(date)
+      .unchecked
+      .bullets
+
     notifier.send_notification(html(bullets))
   end
 

@@ -4,9 +4,9 @@ require "./lib/document"
 class Factory
   def self.bullet(attrs = {})
     Bullet.new(
-      id:      attrs[:id] || "defg5678",
+      id:      attrs[:id]      || "defg5678",
       content: attrs[:content] || "The content",
-      note:    attrs[:note] || "A note",
+      note:    attrs[:note]    || "A note",
       checked: attrs[:checked] || false,
       file_id: attrs[:file_id] || "abcd1234",
     )

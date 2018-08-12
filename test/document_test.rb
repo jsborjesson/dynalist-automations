@@ -21,4 +21,15 @@ class DocumentTest < Minitest::Test
 
     assert_equal [one, two], doc.with_date(Date.new(2018, 8, 9)).bullets
   end
+
+  def test_unchecked
+    bullets = [
+      one = Factory.bullet(checked: false),
+      two = Factory.bullet(checked: true),
+      three = Factory.bullet(checked: false),
+    ]
+    doc = Document.new("doc_id", bullets)
+
+    assert_equal [one, three], doc.unchecked.bullets
+  end
 end

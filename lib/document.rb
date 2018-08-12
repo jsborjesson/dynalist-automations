@@ -22,4 +22,11 @@ class Document
       bullets.select { |b| b.date&.to_date == date }
     )
   end
+
+  def unchecked
+    Document.new(
+      id,
+      bullets.reject(&:checked?)
+    )
+  end
 end
