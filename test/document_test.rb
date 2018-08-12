@@ -10,7 +10,7 @@ class DocumentTest < Minitest::Test
     assert doc.bullets.all? { |b| Bullet === b }
   end
 
-  def test_date_filter
+  def test_with_date
     bullets = [
       Factory.bullet,
       one = Factory.bullet(note: "!(2018-08-09 15:15)"),
