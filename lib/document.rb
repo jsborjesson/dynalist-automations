@@ -16,7 +16,10 @@ class Document
     )
   end
 
-  def bullets_with_date(date)
-    bullets.select { |b| b.date&.to_date == date }
+  def with_date(date)
+    Document.new(
+      id,
+      bullets.select { |b| b.date&.to_date == date }
+    )
   end
 end

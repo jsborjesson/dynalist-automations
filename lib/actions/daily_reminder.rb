@@ -13,7 +13,7 @@ class DailyReminder
   end
 
   def execute
-    bullets = document.bullets_with_date(date)
+    bullets = document.with_date(date).bullets
     notifier.send_notification(html(bullets))
   end
 

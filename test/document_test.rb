@@ -19,6 +19,6 @@ class DocumentTest < Minitest::Test
     ]
     doc = Document.new("doc_id", bullets)
 
-    assert_equal [one, two], doc.bullets_with_date(Date.new(2018, 8, 9))
+    assert_equal [one, two], doc.with_date(Date.new(2018, 8, 9)).bullets
   end
 end
