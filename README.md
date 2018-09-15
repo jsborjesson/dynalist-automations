@@ -4,6 +4,16 @@
 
 ## Features
 
+All these are currently only available in the specified `MAIN_DOCUMENT` (see Deployment).
+
+### Daily reminders
+
+Every day it will send a summary of bullets marked with today's date to the specified email address.
+
+### Sorting
+
+All bullets marked with `#sort_by_date` will have its children sorted by timestamps.
+
 ## Deployment
 
 - Get an API key from https://dynalist.io/developer
