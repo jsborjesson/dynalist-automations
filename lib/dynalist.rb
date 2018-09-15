@@ -1,4 +1,5 @@
 require "http"
+require "json"
 require "./lib/document"
 require "./lib/bullet"
 
@@ -18,6 +19,13 @@ class Dynalist
     Document.from_json(file_id, response)
   end
 
+  def edit_document(file_id, changes)
+    make_request("doc/edit",
+      file_id: file_id,
+      changes: Array(changes)
+    )
+  end
+
   private
 
   def make_request(endpoint, options = {})
@@ -27,5 +35,25 @@ class Dynalist
     response = HTTP.post(url, json: body)
 
     JSON.parse(response)
+  end
+end
+
+class MoveBullet
+  attr_reader :action, :node_id, :parent_id, :index
+
+  def initialize(node_id:, parent_id:, index:)
+    @action = "move"
+    @node_id = node_id
+    @parent_id = parent_id
+    @index = index
+  end
+
+  def to_json(*args)
+    {
+      action: action,
+      node_id: node_id,
+      parent_id: parent_id,
+      index: index
+    }.to_json(*args)
   end
 end

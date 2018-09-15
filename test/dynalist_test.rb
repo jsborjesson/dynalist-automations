@@ -32,4 +32,29 @@ class DynalistTest < Minitest::Test
     assert_equal 6, doc.bullets.count
     assert doc.bullets.all? { |b| b.kind_of? Bullet }
   end
+
+  def test_move
+    expected = {
+      "file_id": "file_id",
+      "changes": [
+        {
+          "action": "move",
+          "node_id": "abc",
+          "parent_id": "def",
+          "index": 0
+        },
+      ],
+      "token": "abcd1234",
+    }
+    stub_request(:post, "https://dynalist.io/api/v1/doc/edit")
+      .to_return(body: { _code: "OK", _msg: ""}.to_json)
+
+    @api.edit_document("file_id", MoveBullet.new(
+      node_id: "abc",
+      parent_id: "def",
+      index: 0
+    ))
+
+    assert_requested(:post, "https://dynalist.io/api/v1/doc/edit", body: expected.to_json)
+  end
 end
