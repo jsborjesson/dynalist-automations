@@ -33,6 +33,18 @@ class DocumentTest < Minitest::Test
     assert_equal [one, three], doc.unchecked.bullets
   end
 
+  def test_with_tag
+    bullets = [
+      Factory.bullet,
+      one = Factory.bullet(note: "Stuff with a #tag"),
+      two = Factory.bullet(content: "Other @tag stuff"),
+      Factory.bullet(content: "!(2018-08-10)"),
+    ]
+    doc = Document.new("doc_id", bullets)
+
+    assert_equal [one, two], doc.with_tag("tag").bullets
+  end
+
   def test_bullet_id
     doc = Factory.document
 

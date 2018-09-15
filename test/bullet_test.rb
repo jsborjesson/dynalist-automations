@@ -35,11 +35,11 @@ class BulletTest < Minitest::Test
     note_hash_tagged_bullet    = Factory.bullet(note: "A note #tagged bullet")
     note_at_tagged_bullet      = Factory.bullet(note: "A note @tagged bullet")
 
-    refute Factory.bullet.has_tag("tagged")
-    assert content_hash_tagged_bullet.has_tag("tagged")
-    assert content_at_tagged_bullet.has_tag("tagged")
-    assert note_hash_tagged_bullet.has_tag("tagged")
-    assert note_at_tagged_bullet.has_tag("tagged")
+    refute Factory.bullet.has_tag?("tagged")
+    assert content_hash_tagged_bullet.has_tag?("tagged")
+    assert content_at_tagged_bullet.has_tag?("tagged")
+    assert note_hash_tagged_bullet.has_tag?("tagged")
+    assert note_at_tagged_bullet.has_tag?("tagged")
   end
 
   def test_date

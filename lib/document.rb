@@ -17,14 +17,21 @@ class Document
   end
 
   def with_date(date)
-    Document.new(
+    self.class.new(
       id,
       bullets.select { |b| b.date&.to_date == date }
     )
   end
 
+  def with_tag(tag)
+    self.class.new(
+      id,
+      bullets.select { |b| b.has_tag?(tag) }
+    )
+  end
+
   def unchecked
-    Document.new(
+    self.class.new(
       id,
       bullets.reject(&:checked?)
     )
