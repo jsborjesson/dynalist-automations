@@ -29,4 +29,8 @@ class Document
       bullets.reject(&:checked?)
     )
   end
+
+  def bullet(id)
+    bullets.find { |b| b.id == id }
+  end
 end

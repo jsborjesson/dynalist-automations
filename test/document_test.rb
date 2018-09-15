@@ -32,4 +32,11 @@ class DocumentTest < Minitest::Test
 
     assert_equal [one, three], doc.unchecked.bullets
   end
+
+  def test_bullet_id
+    doc = Factory.document
+
+    assert_kind_of Bullet, doc.bullet("root")
+    assert_equal "root", doc.bullet("root").id
+  end
 end
