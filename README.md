@@ -27,7 +27,7 @@ heroku config:set EMAIL_ADDRESS=email_sender@email.com
 heroku config:set EMAIL_PASSWORD="password"
 heroku config:set DYNALIST_API_BASE=https://dynalist.io/api/v1
 heroku config:set DYNALIST_API_TOKEN=your_api_token
-heroku config:set DAILY_REMINDER_DOCUMENT=AABBBCCC
+heroku config:set MAIN_DOCUMENT=AABBBCCC
 
 # Manually run the rake task to see if it works
 heroku run rake send_notification
