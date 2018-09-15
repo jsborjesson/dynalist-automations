@@ -33,4 +33,8 @@ class Document
   def bullet(id)
     bullets.find { |b| b.id == id }
   end
+
+  def children(bullet)
+    bullet.children_ids.map { |b| bullet(b) }
+  end
 end

@@ -39,4 +39,14 @@ class DocumentTest < Minitest::Test
     assert_kind_of Bullet, doc.bullet("root")
     assert_equal "root", doc.bullet("root").id
   end
+
+  def test_children
+    doc = Factory.document
+
+    root = doc.bullet("root")
+    children = doc.children(root)
+
+    assert_equal 2, children.count
+    assert_kind_of Bullet, children.first
+  end
 end
