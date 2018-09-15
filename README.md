@@ -2,19 +2,7 @@
 
 - Sends email updates with all bullet points dated today
 
-## Development
-
-```
-# Install dependencies
-bundle
-
-# Run the tests
-bundle exec rake test
-```
-
-## Resources
-
-- [Dynalist API docs](https://apidocs.dynalist.io/)
+## Features
 
 ## Deployment
 
@@ -45,8 +33,22 @@ heroku config:set DAILY_REMINDER_DOCUMENT=AABBBCCC
 heroku run rake send_notification
 ```
 
-## Using GMail
+### Using GMail
 
 Google will most likely block sending emails from Heroku on the first attempt. You need to log into your account and confirm that the server is yours after trying.
 
 You may have to go to https://accounts.google.com/DisplayUnlockCaptcha in incognito mode, logged into that account.
+
+## Development
+
+```
+# Install dependencies
+bundle
+
+# Run the tests
+bundle exec rake test
+```
+
+## Resources
+
+- [Dynalist API docs](https://apidocs.dynalist.io/)
