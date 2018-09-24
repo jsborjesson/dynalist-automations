@@ -1,6 +1,6 @@
 # Dynalist Automations
 
-- Sends email updates with all bullet points dated today
+A collection of small features that assist my personal use of dynalist.io.
 
 ## Features
 
