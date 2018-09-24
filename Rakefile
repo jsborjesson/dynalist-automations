@@ -6,10 +6,11 @@ Rake::TestTask.new(:test) do |t|
   t.warning = false
 end
 
+task default: :test
+
+# Set up logging
 require "logger"
 LOGGER = Logger.new(STDOUT)
-
-task default: :test
 
 desc "Perform all actions"
 task :action => ["actions:sort", "actions:send_notification"]
@@ -31,7 +32,7 @@ namespace :actions do
     LOGGER.info("Running 'sort' action")
 
     file_id  = ENV.fetch("MAIN_DOCUMENT")
-    api = Dynalist.new
+    api = Dynalist.new(logger: LOGGER)
     document = api.document(file_id)
     action   = Sort.new(document: document, api: api)
 
@@ -43,7 +44,7 @@ namespace :actions do
     LOGGER.info("Running 'send_notification' action")
 
     file_id  = ENV.fetch("MAIN_DOCUMENT")
-    api = Dynalist.new
+    api = Dynalist.new(logger: LOGGER)
     document = api.document(file_id)
     action   = DailyReminder.new(document: document)
 

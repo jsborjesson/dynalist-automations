@@ -1,13 +1,15 @@
 require "http"
 require "json"
+require "logger"
 require "./lib/document"
 require "./lib/bullet"
 
 # Communicates with the Dynalist API
 class Dynalist
-  def initialize(env = ENV)
+  def initialize(env: ENV, logger: Logger.new("/dev/null"))
     @api_base = env.fetch("DYNALIST_API_BASE")
     @api_token = env.fetch("DYNALIST_API_TOKEN")
+    @logger = logger
   end
 
   def files
@@ -32,6 +34,7 @@ class Dynalist
     url = [@api_base, endpoint].join("/")
     body = options.merge(token: @api_token)
 
+    @logger.debug "POST #{url} #{body}"
     response = HTTP.post(url, json: body)
 
     JSON.parse(response)

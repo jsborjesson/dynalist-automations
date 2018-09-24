@@ -10,7 +10,7 @@ class DynalistTest < Minitest::Test
   end
 
   def setup
-    @api = Dynalist.new(fake_env)
+    @api = Dynalist.new(env: fake_env)
   end
 
   def test_files
