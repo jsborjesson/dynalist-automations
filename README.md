@@ -19,7 +19,7 @@ All bullets marked with `#sort_by_date` will have its children sorted by timesta
 - Get an API key from https://dynalist.io/developer
 - Find out the id of the document you want to watch (visible in the link URL when viewing that document)
 - Create a Heroku dyno
-- Attatch a Heroku Scheduler resource, set it to every day when it suits you and set the command to `bundle exec rake send_notification`
+- Attach a Heroku Scheduler resource, set it to every day when it suits you and set the command to `bundle exec rake action`
 
 ```
 # Log into Heroku
@@ -40,7 +40,7 @@ heroku config:set DYNALIST_API_TOKEN=your_api_token
 heroku config:set MAIN_DOCUMENT=AABBBCCC
 
 # Manually run the rake task to see if it works
-heroku run rake send_notification
+heroku run rake action
 ```
 
 ### Using GMail
