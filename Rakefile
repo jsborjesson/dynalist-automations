@@ -6,6 +6,9 @@ Rake::TestTask.new(:test) do |t|
   t.warning = false
 end
 
+require "logger"
+LOGGER = Logger.new(STDOUT)
+
 task default: :test
 
 desc "Require dependencies"
@@ -19,6 +22,8 @@ end
 
 desc "Sort stuff"
 task :sort => :env do
+  LOGGER.info("Running 'sort' action")
+
   file_id  = ENV.fetch("MAIN_DOCUMENT")
   api = Dynalist.new
   document = api.document(file_id)
@@ -29,6 +34,8 @@ end
 
 desc "Send daily notification"
 task :send_notification => :env do
+  LOGGER.info("Running 'send_notification' action")
+
   file_id  = ENV.fetch("MAIN_DOCUMENT")
   api = Dynalist.new
   document = api.document(file_id)
