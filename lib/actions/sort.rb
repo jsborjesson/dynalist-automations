@@ -13,6 +13,7 @@ class Sort
       moves = document
         .children(parent)
         .reject { |b| b.date.nil? } # Do not reorder bullets without a date
+        .reject { |b| b.checked? } # Do not reorder checked off bullets
         .sort_by(&:date)
         .reverse
         .map { |b|

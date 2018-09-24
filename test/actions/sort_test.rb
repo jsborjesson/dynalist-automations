@@ -17,6 +17,7 @@ class SortTest < Minitest::Test
     # Create a document that can be sorted by date
     bullets = [
       second  = Factory.bullet(content: "!(2018-08-10)"),
+      checked = Factory.bullet(note: "!(2018-08-10 15:00)", checked: true),
       third   = Factory.bullet(note: "!(2018-08-10 15:15)"),
       no_date = Factory.bullet,
       first   = Factory.bullet(content: "!(2018-08-09)"),

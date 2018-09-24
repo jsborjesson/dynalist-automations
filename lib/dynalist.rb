@@ -34,7 +34,7 @@ class Dynalist
     url = [@api_base, endpoint].join("/")
     body = options.merge(token: @api_token)
 
-    @logger.debug "POST #{url} #{body}"
+    @logger.debug "POST #{url} #{body.to_json}"
     response = HTTP.post(url, json: body)
 
     JSON.parse(response)
