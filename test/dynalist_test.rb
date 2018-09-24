@@ -40,7 +40,13 @@ class DynalistTest < Minitest::Test
         {
           "action": "move",
           "node_id": "abc",
-          "parent_id": "def",
+          "parent_id": "xyz",
+          "index": 0
+        },
+        {
+          "action": "move",
+          "node_id": "def",
+          "parent_id": "xyz",
           "index": 0
         },
       ],
@@ -49,11 +55,18 @@ class DynalistTest < Minitest::Test
     stub_request(:post, "https://dynalist.io/api/v1/doc/edit")
       .to_return(body: { _code: "OK", _msg: ""}.to_json)
 
-    @api.edit_document("file_id", MoveBullet.new(
-      node_id: "abc",
-      parent_id: "def",
-      index: 0
-    ))
+    @api.edit_document("file_id", [
+      MoveBullet.new(
+        node_id: "abc",
+        parent_id: "xyz",
+        index: 0
+      ),
+      MoveBullet.new(
+        node_id: "def",
+        parent_id: "xyz",
+        index: 0
+      ),
+    ])
 
     assert_requested(:post, "https://dynalist.io/api/v1/doc/edit", body: expected.to_json)
   end
