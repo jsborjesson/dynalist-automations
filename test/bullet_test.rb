@@ -59,6 +59,8 @@ class BulletTest < Minitest::Test
 
   def test_to_html
     bullet = Factory.bullet(
+      id: "defg5678",
+      file_id: "abcd1234",
       content: "The [content](https://dynalist.io/d/asdfgh)",
       note: "A note !(2018-08-09)",
     )

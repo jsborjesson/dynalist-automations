@@ -1,14 +1,16 @@
 require "./lib/bullet"
 require "./lib/document"
+require "securerandom"
 
 class Factory
   def self.bullet(attrs = {})
     Bullet.new(
-      id:      attrs[:id]      || "defg5678",
-      content: attrs[:content] || "The content",
-      note:    attrs[:note]    || "A note",
-      checked: attrs[:checked] || false,
-      file_id: attrs[:file_id] || "abcd1234",
+      id:           attrs[:id]           || SecureRandom.hex,
+      content:      attrs[:content]      || "The content",
+      note:         attrs[:note]         || "A note",
+      checked:      attrs[:checked]      || false,
+      file_id:      attrs[:file_id]      || SecureRandom.hex,
+      children_ids: attrs[:children_ids] || [],
     )
   end
 
