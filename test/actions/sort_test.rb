@@ -37,8 +37,10 @@ class SortTest < Minitest::Test
 
     # Verify that edit_document was called with the correct operations
     assert_equal "doc_id", api.file_id
-    assert_equal [third.id, second.id, first.id], api.changes.map(&:node_id)
+
+    assert api.changes.all? { |mb| MoveBullet === mb }
     assert api.changes.all? { |mb| mb.parent_id == parent.id }
     assert api.changes.all? { |mb| mb.index == 0 }
+    assert_equal [third.id, second.id, first.id], api.changes.map(&:node_id)
   end
 end
