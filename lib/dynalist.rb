@@ -24,7 +24,7 @@ class Dynalist
   def edit_document(file_id, changes)
     make_request("doc/edit",
       file_id: file_id,
-      changes: Array(changes)
+      changes: Array(changes.map(&:to_h))
     )
   end
 
@@ -51,12 +51,12 @@ class MoveBullet
     @index = index
   end
 
-  def to_json(*args)
+  def to_h
     {
       action: action,
       node_id: node_id,
       parent_id: parent_id,
       index: index
-    }.to_json(*args)
+    }
   end
 end
