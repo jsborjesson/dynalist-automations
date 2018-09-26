@@ -22,6 +22,8 @@ class Dynalist
   end
 
   def edit_document(file_id, changeset)
+    fail ArgumentError unless changeset.kind_of?(DocumentChangeset)
+
     make_request("doc/edit",
       file_id: file_id,
       changes: changeset.to_a
