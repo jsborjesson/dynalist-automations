@@ -3,6 +3,7 @@ require "json"
 require "logger"
 require "./lib/document"
 require "./lib/bullet"
+require "./lib/document_changeset"
 
 # Communicates with the Dynalist API
 class Dynalist

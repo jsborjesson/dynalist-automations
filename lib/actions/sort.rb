@@ -1,3 +1,5 @@
+require "./lib/document_changeset"
+
 class Sort
   attr_reader :document, :api
 
@@ -9,19 +11,18 @@ class Sort
   end
 
   def execute
+    changeset = DocumentChangeset.new
+
     document.with_tag(TAG).bullets.each do |parent|
-      moves = document
+      document
         .children(parent)
         .reject { |b| b.date.nil? } # Do not reorder bullets without a date
         .reject { |b| b.checked? } # Do not reorder checked off bullets
         .sort_by(&:date)
         .reverse
-        .map { |b|
-          # Always setting zero gives us a reverse sort without keeping track of an index
-          MoveBullet.new(node_id: b.id, parent_id: parent.id, index: 0)
-        }
-
-      api.edit_document(document.id, moves)
+        .map { |b| changeset.move(node_id: b.id, parent_id: parent.id, index: 0) }
     end
+
+    api.edit_document(document.id, changeset)
   end
 end

@@ -1,6 +1,5 @@
 require "test_helper"
 require "dynalist"
-require "document_changeset"
 
 class DynalistTest < Minitest::Test
   def fake_env
