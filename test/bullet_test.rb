@@ -51,6 +51,23 @@ class BulletTest < Minitest::Test
     assert_equal Date.new(2018, 9, 2), note_dated_bullet.date
   end
 
+  def test_date=
+    b1 = Factory.bullet(content: "Content !(2018-08-09 15:15) and things")
+    b2 = Factory.bullet(note: "Note !(2018-08-09) and things")
+    b3 = Factory.bullet(note: "Stuff and things")
+    b4 = Factory.bullet(note: "")
+
+    b1.date = Date.new(2019, 01, 01)
+    b2.date = Date.new(2019, 01, 01)
+    b3.date = Date.new(2019, 01, 01)
+    b4.date = Date.new(2019, 01, 01)
+
+    assert_equal "Content !(2019-01-01) and things", b1.content
+    assert_equal "Note !(2019-01-01) and things", b2.note
+    assert_equal "Stuff and things !(2019-01-01)", b3.note
+    assert_equal "!(2019-01-01)", b4.note
+  end
+
   def test_link
     bullet = Factory.bullet(file_id: "wvixjccy61qVpesh489VTCUt", id: "Qp5qIiccr1XuAP6rJL5RX_jt")
 

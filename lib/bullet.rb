@@ -44,6 +44,18 @@ class Bullet
     Date.parse(date_string[1]) unless date_string.nil?
   end
 
+  def date=(new_date)
+    new_date_tag = "!(#{new_date.to_date.to_s})"
+    if content.match(DATE_MARKER)
+      content.sub!(DATE_MARKER, new_date_tag)
+    elsif note.match(DATE_MARKER)
+      note.sub!(DATE_MARKER, new_date_tag)
+    else
+      @note << " " unless note.empty?
+      @note << new_date_tag
+    end
+  end
+
   def link
     "https://dynalist.io/d/#{file_id}#z=#{id}"
   end
