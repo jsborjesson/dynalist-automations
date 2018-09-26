@@ -2,16 +2,6 @@ require "test_helper"
 require "actions/sort"
 
 class SortTest < Minitest::Test
-  class DynalistSpy
-    attr_reader :changeset
-
-    def edit_document(changeset)
-      fail "Called multiple times" unless @changeset.nil?
-
-      @changeset = changeset
-    end
-  end
-
   def test_sort
     # Create a document that can be sorted by date
     bullets = [
