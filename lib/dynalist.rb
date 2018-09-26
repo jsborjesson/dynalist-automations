@@ -21,10 +21,10 @@ class Dynalist
     Document.from_json(file_id, response)
   end
 
-  def edit_document(file_id, changes)
+  def edit_document(file_id, changeset)
     make_request("doc/edit",
       file_id: file_id,
-      changes: Array(changes.map(&:to_h))
+      changes: changeset.to_a
     )
   end
 

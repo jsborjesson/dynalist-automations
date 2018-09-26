@@ -1,5 +1,6 @@
 require "test_helper"
 require "dynalist"
+require "document_changeset"
 
 class DynalistTest < Minitest::Test
   def fake_env
@@ -55,18 +56,11 @@ class DynalistTest < Minitest::Test
     stub_request(:post, "https://dynalist.io/api/v1/doc/edit")
       .to_return(body: { _code: "OK", _msg: ""}.to_json)
 
-    @api.edit_document("file_id", [
-      MoveBullet.new(
-        node_id: "abc",
-        parent_id: "xyz",
-        index: 0
-      ),
-      MoveBullet.new(
-        node_id: "def",
-        parent_id: "xyz",
-        index: 0
-      ),
-    ])
+    cs = DocumentChangeset.new
+    cs.move(node_id: "abc", parent_id: "xyz", index: 0)
+    cs.move(node_id: "def", parent_id: "xyz", index: 0)
+
+    @api.edit_document("file_id", cs)
 
     assert_requested(:post, "https://dynalist.io/api/v1/doc/edit", body: expected.to_json)
   end
