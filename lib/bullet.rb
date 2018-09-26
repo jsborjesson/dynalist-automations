@@ -37,22 +37,26 @@ class Bullet
     TAG_MARKERS.any? { |marker| content.match?(marker + tag) || note.match?(marker + tag) }
   end
 
+  def match(regexp)
+    content.match(regexp) || note.match(regexp)
+  end
+
   def date
-    # TODO: Handle multiple matches
-    date_string = content.match(DATE_MARKER) || note.match(DATE_MARKER)
+    date_string = match(DATE_MARKER)
 
     Date.parse(date_string[1]) unless date_string.nil?
   end
 
-  def date=(new_date)
+  # Returns a hash where the key is which area to edit (content/note) and the value is the new text
+  def update_date(new_date)
     new_date_tag = "!(#{new_date.to_date.to_s})"
+
     if content.match(DATE_MARKER)
-      content.sub!(DATE_MARKER, new_date_tag)
+      { content: content.sub(DATE_MARKER, new_date_tag) }
     elsif note.match(DATE_MARKER)
-      note.sub!(DATE_MARKER, new_date_tag)
+      { note: note.sub!(DATE_MARKER, new_date_tag) }
     else
-      @note << " " unless note.empty?
-      @note << new_date_tag
+      { note: note.empty? ? new_date_tag : "#{note} #{new_date_tag}" }
     end
   end
 

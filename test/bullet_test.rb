@@ -42,6 +42,16 @@ class BulletTest < Minitest::Test
     assert note_at_tagged_bullet.has_tag?("tagged")
   end
 
+  def test_match
+    b1 = Factory.bullet(content: "Stuff 123 and things", note: "456 etc")
+    b2 = Factory.bullet(content: "Stuff and things", note: "789 etc")
+    b3 = Factory.bullet
+
+    assert_equal "123", b1.match(/\d{3}/)[0]
+    assert_equal "789", b2.match(/\d{3}/)[0]
+    assert_nil b3.match(/\d{3}/)
+  end
+
   def test_date
     content_dated_bullet = Factory.bullet(content: "A content with date !(2018-08-19) (and other shit)")
     note_dated_bullet = Factory.bullet(note: "#due !(2018-09-02) (Halva priset på leverans)")
@@ -51,21 +61,16 @@ class BulletTest < Minitest::Test
     assert_equal Date.new(2018, 9, 2), note_dated_bullet.date
   end
 
-  def test_date=
+  def test_update_date
     b1 = Factory.bullet(content: "Content !(2018-08-09 15:15) and things")
     b2 = Factory.bullet(note: "Note !(2018-08-09) and things")
     b3 = Factory.bullet(note: "Stuff and things")
     b4 = Factory.bullet(note: "")
 
-    b1.date = Date.new(2019, 01, 01)
-    b2.date = Date.new(2019, 01, 01)
-    b3.date = Date.new(2019, 01, 01)
-    b4.date = Date.new(2019, 01, 01)
-
-    assert_equal "Content !(2019-01-01) and things", b1.content
-    assert_equal "Note !(2019-01-01) and things", b2.note
-    assert_equal "Stuff and things !(2019-01-01)", b3.note
-    assert_equal "!(2019-01-01)", b4.note
+    assert_equal ({ content: "Content !(2019-01-01) and things" }), b1.update_date(Date.new(2019, 01, 01))
+    assert_equal ({ note: "Note !(2019-01-01) and things" }),       b2.update_date(Date.new(2019, 01, 01))
+    assert_equal ({ note: "Stuff and things !(2019-01-01)" }),      b3.update_date(Date.new(2019, 01, 01))
+    assert_equal ({ note: "!(2019-01-01)" }),                       b4.update_date(Date.new(2019, 01, 01))
   end
 
   def test_link
