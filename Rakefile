@@ -13,7 +13,7 @@ require "logger"
 LOGGER = Logger.new(STDOUT)
 
 desc "Perform all actions"
-task :action => ["actions:sort", "actions:send_notification"]
+task :action => ["actions:repeat", "actions:sort", "actions:send_notification"]
 
 namespace :actions do
   desc "Require dependencies"
@@ -25,29 +25,31 @@ namespace :actions do
     require "./lib/dynalist"
     require "./lib/actions/daily_reminder"
     require "./lib/actions/sort"
+    require "./lib/actions/repeat"
+
+    @file_id  = ENV.fetch("MAIN_DOCUMENT")
+    @api      = Dynalist.new(logger: LOGGER)
+    @document = @api.document(@file_id)
   end
 
   desc "Sort stuff"
   task :sort => :env do
     LOGGER.info("Running 'sort' action")
+    action = Sort.new(document: @document, api: @api)
+    action.execute
+  end
 
-    file_id  = ENV.fetch("MAIN_DOCUMENT")
-    api = Dynalist.new(logger: LOGGER)
-    document = api.document(file_id)
-    action   = Sort.new(document: document, api: api)
-
+  desc "Send daily notification"
+  task :repeat => :env do
+    LOGGER.info("Running 'repeat' action")
+    action = Repeat.new(document: @document, api: @api)
     action.execute
   end
 
   desc "Send daily notification"
   task :send_notification => :env do
     LOGGER.info("Running 'send_notification' action")
-
-    file_id  = ENV.fetch("MAIN_DOCUMENT")
-    api = Dynalist.new(logger: LOGGER)
-    document = api.document(file_id)
-    action   = DailyReminder.new(document: document)
-
+    action = DailyReminder.new(document: @document)
     action.execute
   end
 end
