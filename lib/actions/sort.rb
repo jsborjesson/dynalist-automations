@@ -11,7 +11,7 @@ class Sort
   end
 
   def execute
-    changeset = DocumentChangeset.new
+    changeset = DocumentChangeset.new(document.id)
 
     document.with_tag(TAG).bullets.each do |parent|
       document
@@ -23,6 +23,6 @@ class Sort
         .map { |b| changeset.move(node_id: b.id, parent_id: parent.id, index: 0) }
     end
 
-    api.edit_document(document.id, changeset)
+    api.edit_document(changeset)
   end
 end

@@ -1,9 +1,8 @@
 class DocumentChangeset
-  attr_reader :changes
+  attr_reader :file_id, :changes
 
-  alias_method :to_a, :changes
-
-  def initialize
+  def initialize(file_id)
+    @file_id = file_id
     @changes = []
   end
 
@@ -22,5 +21,9 @@ class DocumentChangeset
     change[:note]    = note.to_s unless note.nil?
     change[:checked] = !!checked unless checked.nil?
     changes << change
+  end
+
+  def to_h
+    { file_id: file_id, changes: changes }
   end
 end

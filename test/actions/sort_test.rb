@@ -3,12 +3,11 @@ require "actions/sort"
 
 class SortTest < Minitest::Test
   class DynalistSpy
-    attr_reader :file_id, :changeset
+    attr_reader :changeset
 
-    def edit_document(file_id, changeset)
-      fail "Called multiple times" unless @file_id.nil?
+    def edit_document(changeset)
+      fail "Called multiple times" unless @changeset.nil?
 
-      @file_id = file_id
       @changeset = changeset
     end
   end
@@ -46,7 +45,7 @@ class SortTest < Minitest::Test
     action.execute
 
     # Verify that edit_document was called with the correct operations
-    assert_equal "doc_id", api.file_id
+    assert_equal "doc_id", api.changeset.file_id
     expected = [
       {
         action: "move",
@@ -79,6 +78,6 @@ class SortTest < Minitest::Test
         index: 0
       },
     ]
-    assert_equal expected, api.changeset.to_a
+    assert_equal expected, api.changeset.changes
   end
 end

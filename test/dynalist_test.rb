@@ -55,11 +55,11 @@ class DynalistTest < Minitest::Test
     stub_request(:post, "https://dynalist.io/api/v1/doc/edit")
       .to_return(body: { _code: "OK", _msg: ""}.to_json)
 
-    cs = DocumentChangeset.new
+    cs = DocumentChangeset.new("file_id")
     cs.move(node_id: "abc", parent_id: "xyz", index: 0)
     cs.move(node_id: "def", parent_id: "xyz", index: 0)
 
-    @api.edit_document("file_id", cs)
+    @api.edit_document(cs)
 
     assert_requested(:post, "https://dynalist.io/api/v1/doc/edit", body: expected.to_json)
   end

@@ -22,13 +22,10 @@ class Dynalist
     Document.from_json(file_id, response)
   end
 
-  def edit_document(file_id, changeset)
+  def edit_document(changeset)
     fail ArgumentError unless changeset.kind_of?(DocumentChangeset)
 
-    make_request("doc/edit",
-      file_id: file_id,
-      changes: changeset.to_a
-    )
+    make_request("doc/edit", changeset.to_h)
   end
 
   private
