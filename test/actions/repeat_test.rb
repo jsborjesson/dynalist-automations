@@ -8,7 +8,7 @@ class RepeatTest < Minitest::Test
     # Create a document that can be sorted by date
     bullets = [
       checked_note    = Factory.bullet(content: "l337d", note: "Notes #repeat 14d !(2017-08-31)", checked: true),
-      checked_content = Factory.bullet(content: "Title #repeat 7d !(2017-08-31) and stuff", checked: true),
+      checked_content = Factory.bullet(content: "Title #repeat 1m !(2017-08-31) and stuff", checked: true),
       checked_mixed   = Factory.bullet(content: "Do thing by !(2017-08-31)", note: "Notes #repeat 7d", checked: true),
 
       no_date          = Factory.bullet,
@@ -34,7 +34,7 @@ class RepeatTest < Minitest::Test
       {
         action: "edit",
         node_id: checked_content.id,
-        content: "Title #repeat 7d !(2017-09-07) and stuff",
+        content: "Title #repeat 1m !(2017-09-30) and stuff",
         checked: false
       },
       {
