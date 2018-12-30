@@ -18,7 +18,7 @@ class DailyReminder
       .unchecked
       .bullets
 
-    notifier.send_notification(html(bullets))
+    notifier.send_notification(html(bullets)) unless bullets.empty?
   end
 
   private

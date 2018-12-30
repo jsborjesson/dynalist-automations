@@ -15,4 +15,16 @@ class DailyReminderTest < Minitest::Test
     action.execute
     emailer.verify
   end
+
+  def test_dont_send_empty_email
+    emailer = :never_called
+
+    action = DailyReminder.new(
+      document: Factory.document,
+      notifier: emailer,
+      date: Date.new(2030, 1, 1)
+    )
+
+    action.execute
+  end
 end
